@@ -24,4 +24,5 @@ import { RecipeEntity } from './recipes/db/recipe.entity';
 })
 export class AppModule {}
 
-// TODO: configure global error handler?
+// TODO: error handling?
+// TODO: migrations!!!
