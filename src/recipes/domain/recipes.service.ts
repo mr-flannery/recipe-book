@@ -20,4 +20,8 @@ export class RecipeService {
   async list(): Promise<Recipe[]> {
     return (await this.recipeRepository.find()).map(RecipeEntity.toRecipe)
   }
+
+  async getById(id: number): Promise<Recipe> {
+    return RecipeEntity.toRecipe(await this.recipeRepository.findOneBy({ id }))
+  }
 }

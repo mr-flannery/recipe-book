@@ -35,6 +35,7 @@ export class RecipeEntity {
 
   static toRecipe(recipeEntity: RecipeEntity): Recipe {
     return {
+      id: recipeEntity.id.toString(),
       name: recipeEntity.name,
       cookTime: recipeEntity.cookTime.toString(),
       prepTime: recipeEntity.prepTime.toString(),

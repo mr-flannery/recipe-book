@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>App</title>
+  </head>
+  <body>
+    <h1>Recipes</h1>
+    <ul>
+      {{#each recipes}}
+        <li><a href="/recipes/{{id}}">{{name}}</a></li>
+      {{/each}}
+    </ul>
+    <a href="/recipes/new">Add a recipe</a>
+  </body>
+</html>

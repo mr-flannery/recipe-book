@@ -5,7 +5,7 @@ import { RecipeDto, fromRecipe, toRecipe } from './recipe.dto';
 
 // TODO: can I pull out 'api' somehow?
 @Controller('api/recipes')
-export class RecipeController {
+export class RecipesApiController {
   constructor(private readonly recipeService: RecipeService) {}
 
   @Post('submit')
