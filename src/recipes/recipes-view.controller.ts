@@ -12,7 +12,7 @@ export class RecipeViewController {
   async listPage(@Res() res: Response) {
     const recipes = (await this.recipeService.list()).map(fromRecipe)
 
-    return res.render('recipes/list', { recipes })
+    return res.render('recipes/list', { layout: 'default', recipes })
   }
 
   @Get('/new')

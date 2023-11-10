@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { RecipeModule } from './recipes/recipes.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RecipeEntity } from './recipes/db/recipe.entity';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -18,7 +20,13 @@ import { RecipeEntity } from './recipes/db/recipe.entity';
       database: 'recipes',
       entities: [RecipeEntity], // TODO: helper function?
       synchronize: true, // TODO: shouldn't be set to true in production - what does this do?
-    }),],
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'static'),
+      serveRoot: '/static',
+      serveStaticOptions: { index: false }
+    })
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
