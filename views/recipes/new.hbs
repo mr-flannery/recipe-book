@@ -9,43 +9,42 @@
   <body>
     <h1 class="text-2xl my-8">Add Recipe</h1>
     <form action="/api/recipes/submit" method="POST">
-      <div class="grid grid-cols-3">
-        <div class="grid grid-cols-2">
-          <label class="" for="name">Name:</label>
-          <input class="border rounded border-gray-400" type="text" name="name" id="name">
+      <div class="grid grid-cols-1 md:grid-cols-3">
+        <div class="flex flex-col md:mr-4 mb-4 gap-4">
+          <div class="grid grid-cols-3">
+            <label class="" for="name">Name:</label>
+            <input class="col-span-2 border rounded border-gray-400" type="text" name="name" id="name">
+          </div>
+          <div class="grid grid-cols-3">
             <label for="prepTime">Preparation Time:</label>
-            <input type="text" name="prepTime" id="prepTime">
+            <input class="col-span-2 border rounded border-gray-400" type="text" name="prepTime" id="prepTime">
+          </div>
+          <div class="grid grid-cols-3">
             <label for="cookTime">Cooking Time:</label>
-            <input type="text" name="cookTime" id="cookTime">
-          
+            <input class="col-span-2 border rounded border-gray-400" type="text" name="cookTime" id="cookTime">
+          </div>
         </div>
         <div class="col-span-2">
           <div>
             <label for="ingredients">Ingredients</label>
-            <textarea id="ingredients" name="ingredients" rows="5" cols="33">
-            </textarea>
+            <div class="mt-2">
+              <textarea id="ingredients" name="ingredients" rows="5" cols="33">
+              </textarea>
+            </div>
           </div>
           <div>
             <label for="instructions">Instructions</label>
-            <textarea id="instructions" name="instructions" rows="5" cols="33">
-            </textarea>
+            <div class="mt-2">
+              <textarea id="instructions" name="instructions" rows="5" cols="33">
+              </textarea>
+            </div>
           </div>
         </div>
-      </div>
-      
-      
-      
+      </div>      
       <div>
-        <input type="submit" value="Send" accesskey="s" />
+        <input class="cursor-pointer bg-gray-600 border rounded-lg border-gray-600 px-4" type="submit" value="Send" accesskey="s" />
       </div>
     </form>
-
-    <h2>Recipe List</h2>
-    <ul>
-      {{#each recipes}}
-        <li>{{name}}</li>
-      {{/each}}
-    </ul>
     <script>
       const ingredientsEditor = new SimpleMDE({ element: document.getElementById("ingredients") });
       const instructionsEditor = new SimpleMDE({ element: document.getElementById("instructions") });
