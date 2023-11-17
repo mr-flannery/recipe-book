@@ -7,31 +7,34 @@
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
   </head>
   <body>
-    <h1>Recipes</h1>
-    <h2>Add Recipe</h2>
+    <h1 class="text-2xl my-8">Add Recipe</h1>
     <form action="/api/recipes/submit" method="POST">
-      <div>
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name">
+      <div class="grid grid-cols-3">
+        <div class="grid grid-cols-2">
+          <label class="" for="name">Name:</label>
+          <input class="border rounded border-gray-400" type="text" name="name" id="name">
+            <label for="prepTime">Preparation Time:</label>
+            <input type="text" name="prepTime" id="prepTime">
+            <label for="cookTime">Cooking Time:</label>
+            <input type="text" name="cookTime" id="cookTime">
+          
+        </div>
+        <div class="col-span-2">
+          <div>
+            <label for="ingredients">Ingredients</label>
+            <textarea id="ingredients" name="ingredients" rows="5" cols="33">
+            </textarea>
+          </div>
+          <div>
+            <label for="instructions">Instructions</label>
+            <textarea id="instructions" name="instructions" rows="5" cols="33">
+            </textarea>
+          </div>
+        </div>
       </div>
-      <div>
-        <label for="ingredients">Ingredients</label>
-        <textarea id="ingredients" name="ingredients" rows="5" cols="33">
-        </textarea>
-      </div>
-      <div>
-        <label for="instructions">Instructions</label>
-        <textarea id="instructions" name="instructions" rows="5" cols="33">
-        </textarea>
-      </div>
-      <div>
-        <label for="prepTime">Preparation Time</label>
-        <input type="text" name="prepTime" id="prepTime">
-      </div>
-      <div>
-        <label for="cookTime">Cooking Time</label>
-        <input type="text" name="cookTime" id="cookTime">
-      </div>
+      
+      
+      
       <div>
         <input type="submit" value="Send" accesskey="s" />
       </div>
