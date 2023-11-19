@@ -1,4 +1,5 @@
 import { Recipe } from "./domain/recipe";
+import { z } from "zod";
 
 export interface RecipeDto {
   name: string;
@@ -8,11 +9,24 @@ export interface RecipeDto {
   cookTime: string;
 }
 
+const RecipeSchema = z.object({
+  name: z.string().min(1).max(40),
+  ingredients: z.string(),
+  instructions: z.string(),
+  prepTime: z.coerce.number(),
+  cookTime: z.coerce.number()
+});
+
 export function toRecipe(recipeDto: RecipeDto): Recipe {
-  // TODO: schema validation
-  return recipeDto
+  try {
+    return RecipeSchema.parse(recipeDto) as Recipe
+  } catch (error) {
+    // TODO: error handling wtf
+    throw error
+  }
 }
 
 export function fromRecipe(recipe: Recipe): RecipeDto {
-  return recipe
+  // TODO
+  return recipe as undefined as RecipeDto
 }

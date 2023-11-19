@@ -5,5 +5,6 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  safelist: ["col-span-3", "border-red-500"]
 }
 

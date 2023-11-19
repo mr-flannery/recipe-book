@@ -9,10 +9,9 @@ export class RecipesApiController {
   constructor(private readonly recipeService: RecipeService) {}
 
   @Post('submit')
-  submit(@Req() request: Request, @Res() res: Response) {
-    // TODO: schema validation
+  async submit(@Req() request: Request, @Res() res: Response) {
     const recipe = toRecipe(request.body as unknown as RecipeDto);
-    this.recipeService.submit(recipe)
+    await this.recipeService.submit(recipe)
 
     return res
       .status(302)

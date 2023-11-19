@@ -12,9 +12,9 @@ export class RecipeService {
     private readonly recipeRepository: Repository<RecipeEntity>
   ) {}
 
-  submit(recipe: Recipe) {
+  async submit(recipe: Recipe) {
       // const recipeEntity = this.recipeRepository.create()
-      this.recipeRepository.save(RecipeEntity.fromRecipe(recipe))
+      return this.recipeRepository.save(RecipeEntity.fromRecipe(recipe))
   }
 
   async list(): Promise<Recipe[]> {

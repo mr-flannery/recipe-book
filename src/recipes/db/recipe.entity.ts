@@ -8,7 +8,7 @@ export class RecipeEntity {
 
   @Column({
     length: 100
-})
+  })
   name: string;
 
   @Column("text")
@@ -28,8 +28,8 @@ export class RecipeEntity {
     recipeEntity.name = recipe.name;
     recipeEntity.ingredients = recipe.ingredients;
     recipeEntity.instructions = recipe.instructions;
-    recipeEntity.cookTime = parseInt(recipe.cookTime);
-    recipeEntity.prepTime = parseInt(recipe.prepTime);
+    recipeEntity.cookTime = recipe.cookTime;
+    recipeEntity.prepTime = recipe.prepTime;
     return recipeEntity;
   }
 
@@ -37,8 +37,8 @@ export class RecipeEntity {
     return {
       id: recipeEntity.id.toString(),
       name: recipeEntity.name,
-      cookTime: recipeEntity.cookTime.toString(),
-      prepTime: recipeEntity.prepTime.toString(),
+      cookTime: recipeEntity.cookTime,
+      prepTime: recipeEntity.prepTime,
       ingredients: recipeEntity.ingredients,
       instructions:recipeEntity.instructions
     }
