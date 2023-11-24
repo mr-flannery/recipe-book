@@ -1,182 +1,171 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>App</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-  </head>
-  <body>
-    <h1 class="text-2xl my-8">Add Recipe</h1>
-    <form id="new-recipe-form" action="/api/recipes/submit" method="POST">
-      <div class="grid grid-cols-1 md:grid-cols-3">
-        <div class="flex flex-col md:mr-4 mb-4 gap-4">
-          <div class="grid grid-cols-3">
-            <label class="" for="name">Name:</label>
-            <input class="col-span-2 border rounded border-gray-400" type="text" name="name" id="name">
-            <div id="name-invalid-msg" class="col-span-3 text-red-500" style="display: none;">Name must be between 1 and 100 characters long!</div>
-          </div>
-          <div class="grid grid-cols-3">
-            <label for="prepTime">Preparation Time:</label>
-            <input class="col-span-2 border rounded border-gray-400" type="text" name="prepTime" id="prepTime">
-            <div id="prepTime-invalid-msg" class="col-span-3 text-red-500" style="display: none;">Preparation Time must be a number!</div>
-          </div>
-          <div class="grid grid-cols-3">
-            <label for="cookTime">Cooking Time:</label>
-            <input class="col-span-2 border rounded border-gray-400" type="text" name="cookTime" id="cookTime">
-            <div id="cookTime-invalid-msg" class="col-span-3 text-red-500" style="display: none;">Cooking Time must be a number!</div>
-          </div>
-        </div>
-        <div class="col-span-2">
-          <div>
-            <label for="ingredients">Ingredients</label>
-            <div class="mt-2">
-              <textarea id="ingredients" name="ingredients" rows="5" cols="33">
-              </textarea>
-            </div>
-            <div id="ingredients-invalid-msg" class="col-span-3 text-red-500" style="display: none;">Ingredients must not be empty!</div>
-          </div>
-          <div>
-            <label for="instructions">Instructions</label>
-            <div class="mt-2">
-              <textarea id="instructions" name="instructions" rows="5" cols="33">
-              </textarea>
-            </div>
-            <div id="instructions-invalid-msg" class="col-span-3 text-red-500" style="display: none;">Instructions must not be empty!</div>
-          </div>
-        </div>
-      </div>      
-      <div>
-        <input class="cursor-pointer bg-gray-600 border rounded-lg border-gray-600 px-4" type="submit" value="Send" accesskey="s" />
+<h1 class="text-2xl my-8">Add Recipe</h1>
+<form id="new-recipe-form" action="/api/recipes/submit" method="POST">
+  <div class="grid grid-cols-1 md:grid-cols-3">
+    <div class="flex flex-col md:mr-4 mb-4 gap-4">
+      <div class="grid grid-cols-3">
+        <label class="" for="name">Name:</label>
+        <input class="col-span-2 border rounded border-gray-400" type="text" name="name" id="name">
+        <div id="name-invalid-msg" class="col-span-3 text-red-500" style="display: none;">Name must be between 1 and 100 characters long!</div>
       </div>
-    </form>
-    <script>
-      const ingredientsEditor = new SimpleMDE({ element: document.getElementById("ingredients") });
-      ingredientsEditor.value(ingredientsEditor.value().trim()); // workaround
+      <div class="grid grid-cols-3">
+        <label for="prepTime">Preparation Time:</label>
+        <input class="col-span-2 border rounded border-gray-400" type="text" name="prepTime" id="prepTime">
+        <div id="prepTime-invalid-msg" class="col-span-3 text-red-500" style="display: none;">Preparation Time must be a number!</div>
+      </div>
+      <div class="grid grid-cols-3">
+        <label for="cookTime">Cooking Time:</label>
+        <input class="col-span-2 border rounded border-gray-400" type="text" name="cookTime" id="cookTime">
+        <div id="cookTime-invalid-msg" class="col-span-3 text-red-500" style="display: none;">Cooking Time must be a number!</div>
+      </div>
+    </div>
+    <div class="col-span-2">
+      <div>
+        <label for="ingredients">Ingredients</label>
+        <div class="mt-2">
+          <textarea id="ingredients" name="ingredients" rows="5" cols="33">
+          </textarea>
+        </div>
+        <div id="ingredients-invalid-msg" class="col-span-3 text-red-500" style="display: none;">Ingredients must not be empty!</div>
+      </div>
+      <div>
+        <label for="instructions">Instructions</label>
+        <div class="mt-2">
+          <textarea id="instructions" name="instructions" rows="5" cols="33">
+          </textarea>
+        </div>
+        <div id="instructions-invalid-msg" class="col-span-3 text-red-500" style="display: none;">Instructions must not be empty!</div>
+      </div>
+    </div>
+  </div>      
+  <div>
+    <input class="cursor-pointer bg-gray-600 border rounded-lg border-gray-600 px-4" type="submit" value="Send" accesskey="s" />
+  </div>
+</form>
+<script>
+  const ingredientsEditor = new SimpleMDE({ element: document.getElementById("ingredients") });
+  ingredientsEditor.value(ingredientsEditor.value().trim()); // workaround
 
-      const instructionsEditor = new SimpleMDE({ element: document.getElementById("instructions") });
-      instructionsEditor.value(instructionsEditor.value().trim()); // workaround
+  const instructionsEditor = new SimpleMDE({ element: document.getElementById("instructions") });
+  instructionsEditor.value(instructionsEditor.value().trim()); // workaround
 
-      const showInvalidMsg = (msgSelector, inputSelector) => {
-        document.querySelector(msgSelector).style.display = "block";
-        document.querySelector(inputSelector).classList.add("border-red-500")
-      }
+  const showInvalidMsg = (msgSelector, inputSelector) => {
+    document.querySelector(msgSelector).style.display = "block";
+    document.querySelector(inputSelector).classList.add("border-red-500")
+  }
 
-      const hideInvalidMsg = (msgSelector, inputSelector) => {
-        document.querySelector(msgSelector).style.display = "none";
-        document.querySelector(inputSelector).classList.remove("border-red-500")
-      }
+  const hideInvalidMsg = (msgSelector, inputSelector) => {
+    document.querySelector(msgSelector).style.display = "none";
+    document.querySelector(inputSelector).classList.remove("border-red-500")
+  }
 
-      document.querySelector("#name").addEventListener("input", (event) => {
+  document.querySelector("#name").addEventListener("input", (event) => {
+    const value = document.querySelector("#name").value;
+    
+    if (!value) {
+      hideInvalidMsg("#name-invalid-msg", "#name")
+    } else if (value.length > 100) {
+      showInvalidMsg("#name-invalid-msg", "#name")
+    } else {
+      hideInvalidMsg("#name-invalid-msg", "#name")
+    }
+  })
+
+  document.querySelector("#prepTime").addEventListener("input", event => {
+    const value = document.querySelector("#prepTime").value
+    
+    if (!value) {
+      hideInvalidMsg("#prepTime-invalid-msg", "#prepTime")
+    } else if (isNaN(parseInt(document.querySelector("#prepTime").value))) {
+      showInvalidMsg("#prepTime-invalid-msg", "#prepTime")
+    } else {
+      hideInvalidMsg("#prepTime-invalid-msg", "#prepTime")
+    }
+  })
+
+  document.querySelector("#cookTime").addEventListener("input", event => {
+    const value = document.querySelector("#cookTime").value
+    
+    if (!value) {
+      hideInvalidMsg("#cookTime-invalid-msg", "#cookTime")
+    } else if (isNaN(parseInt(document.querySelector("#cookTime").value))) {
+      showInvalidMsg("#cookTime-invalid-msg", "#cookTime")
+    } else {
+      hideInvalidMsg("#cookTime-invalid-msg", "#cookTime")
+    }
+  })
+
+  ingredientsEditor.codemirror.on("change", function(){
+    hideInvalidMsg("#ingredients-invalid-msg", "#ingredients")
+  });
+
+  instructionsEditor.codemirror.on("change", function(){
+    hideInvalidMsg("#instructions-invalid-msg", "#instructions")
+  });
+
+  document.querySelector("#new-recipe-form").addEventListener("submit", event => {
+    isFormValid = [
+      () => {
         const value = document.querySelector("#name").value;
-        
-        if (!value) {
-          hideInvalidMsg("#name-invalid-msg", "#name")
-        } else if (value.length > 100) {
+
+        if (!value || !value.trim() || value.trim().length > 100) {
           showInvalidMsg("#name-invalid-msg", "#name")
+          return false;
         } else {
           hideInvalidMsg("#name-invalid-msg", "#name")
+          return true;
         }
-      })
-
-      document.querySelector("#prepTime").addEventListener("input", event => {
+      },
+      () => {
         const value = document.querySelector("#prepTime").value
-        
-        if (!value) {
-          hideInvalidMsg("#prepTime-invalid-msg", "#prepTime")
-        } else if (isNaN(parseInt(document.querySelector("#prepTime").value))) {
+    
+        if (isNaN(parseInt(document.querySelector("#prepTime").value))) {
           showInvalidMsg("#prepTime-invalid-msg", "#prepTime")
+          return false;
         } else {
           hideInvalidMsg("#prepTime-invalid-msg", "#prepTime")
+          return true;
         }
-      })
-
-      document.querySelector("#cookTime").addEventListener("input", event => {
+      },
+      () => {
         const value = document.querySelector("#cookTime").value
-        
-        if (!value) {
-          hideInvalidMsg("#cookTime-invalid-msg", "#cookTime")
-        } else if (isNaN(parseInt(document.querySelector("#cookTime").value))) {
+    
+        if (isNaN(parseInt(document.querySelector("#cookTime").value))) {
           showInvalidMsg("#cookTime-invalid-msg", "#cookTime")
+          return false;
         } else {
           hideInvalidMsg("#cookTime-invalid-msg", "#cookTime")
+          return true;
         }
-      })
+      },
+      () => {
+        const value = document.querySelector("#ingredients").value;
 
-      ingredientsEditor.codemirror.on("change", function(){
-        hideInvalidMsg("#ingredients-invalid-msg", "#ingredients")
-      });
-
-      instructionsEditor.codemirror.on("change", function(){
-        hideInvalidMsg("#instructions-invalid-msg", "#instructions")
-      });
-
-      document.querySelector("#new-recipe-form").addEventListener("submit", event => {
-        isFormValid = [
-          () => {
-            const value = document.querySelector("#name").value;
-    
-            if (!value || !value.trim() || value.trim().length > 100) {
-              showInvalidMsg("#name-invalid-msg", "#name")
-              return false;
-            } else {
-              hideInvalidMsg("#name-invalid-msg", "#name")
-              return true;
-            }
-          },
-          () => {
-            const value = document.querySelector("#prepTime").value
-        
-            if (isNaN(parseInt(document.querySelector("#prepTime").value))) {
-              showInvalidMsg("#prepTime-invalid-msg", "#prepTime")
-              return false;
-            } else {
-              hideInvalidMsg("#prepTime-invalid-msg", "#prepTime")
-              return true;
-            }
-          },
-          () => {
-            const value = document.querySelector("#cookTime").value
-        
-            if (isNaN(parseInt(document.querySelector("#cookTime").value))) {
-              showInvalidMsg("#cookTime-invalid-msg", "#cookTime")
-              return false;
-            } else {
-              hideInvalidMsg("#cookTime-invalid-msg", "#cookTime")
-              return true;
-            }
-          },
-          () => {
-            const value = document.querySelector("#ingredients").value;
-    
-            if (!value || value.trim() === "") {
-              showInvalidMsg("#ingredients-invalid-msg", "#ingredients")
-              return false;
-            } else {
-              hideInvalidMsg("#ingredients-invalid-msg", "#ingredients")
-              return true;
-            }
-          },
-          () => {
-            const value = document.querySelector("#instructions").value;
-    
-            if (!value || value.trim() === "") {
-              showInvalidMsg("#instructions-invalid-msg", "#instructions")
-              return false;
-            } else {
-              hideInvalidMsg("#instructions-invalid-msg", "#instructions")
-              return true;
-            }
-          }
-        ].reduce((result, validatorFn) => { 
-          // order matters!
-          return validatorFn() && result
-        }, true)
-
-        if (!isFormValid) {
-          event.preventDefault();
+        if (!value || value.trim() === "") {
+          showInvalidMsg("#ingredients-invalid-msg", "#ingredients")
+          return false;
+        } else {
+          hideInvalidMsg("#ingredients-invalid-msg", "#ingredients")
+          return true;
         }
-      })
-    </script>
-  </body>
-</html>
+      },
+      () => {
+        const value = document.querySelector("#instructions").value;
+
+        if (!value || value.trim() === "") {
+          showInvalidMsg("#instructions-invalid-msg", "#instructions")
+          return false;
+        } else {
+          hideInvalidMsg("#instructions-invalid-msg", "#instructions")
+          return true;
+        }
+      }
+    ].reduce((result, validatorFn) => { 
+      // order matters!
+      return validatorFn() && result
+    }, true)
+
+    if (!isFormValid) {
+      event.preventDefault();
+    }
+  })
+</script>

@@ -22,6 +22,7 @@ export class RecipeViewController {
 
   @Get(':id')
   async detailPage(@Param() params: { id: string }, @Res() res: Response) {
+    // TODO: if there's no recipe with the given ID, this will currently produce a 500
     const recipe = fromRecipe(await this.recipeService.getById(parseInt(params.id)))
     
     return res.render('recipes/detail', { recipe })
