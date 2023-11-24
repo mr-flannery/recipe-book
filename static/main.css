@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-2xl;
+    @apply mb-4;
+    @apply mt-2;
+  }
+  h2 {
+    @apply text-xl;
+    @apply mb-4;
+    @apply mt-2;
+  }
+  h3 {
+    @apply text-lg;
+    @apply mb-4;
+    @apply mt-2;
+  }
+  ul {
+    @apply list-disc;
+    @apply list-inside;
+  }
+  ol {
+    @apply list-decimal;
+    @apply list-inside;
+  }
+  ul ul {
+    @apply ml-2;
+  }
+  ul ol {
+    @apply ml-2;   
+  }
+  ol ol {
+    @apply ml-2;
+  }
+  ol ul {
+    @apply ml-2;   
+  }
+}
