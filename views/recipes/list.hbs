@@ -2,9 +2,22 @@
 <div class="container mx-8">
   <h1 class="text-2xl">Recipes</h1>
   <ul>
-    {{#each recipes}}
-      <li><a href="/recipes/{{id}}">{{name}}</a></li>
-    {{/each}}
+    <div class="grid grid-cols-2 gap-4">
+      {{#each recipes}}
+        <div class="flex flex-row border rounded-md">
+          <a class="hover:underline hover:underline-offset-4" href="/recipes/{{id}}">
+            <img class="inline-block rounded-l-md mr-4 w-48 h-48" src="/static/placeholder.jpg" alt="">
+          </a>
+          <div class="inline-block">
+            <h2><a class="hover:underline hover:underline-offset-4" href="/recipes/{{id}}">{{name}}</a></h2>
+            <div class="flex flex-row gap-2">
+              <span>Preparation time: {{prepTime}}</span>
+              <span>Cooking time: {{cookTime}}</span>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
   </ul>
   <a href="/recipes/new">Add a recipe</a>
 </div>
