@@ -13,7 +13,6 @@ export class RecipeService {
   ) {}
 
   async submit(recipe: Recipe) {
-      // const recipeEntity = this.recipeRepository.create()
       return this.recipeRepository.save(RecipeEntity.fromRecipe(recipe))
   }
 

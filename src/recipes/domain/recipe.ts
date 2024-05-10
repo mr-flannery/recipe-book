@@ -1,3 +1,5 @@
+import { Tag } from "./tag";
+
 export interface Recipe {
   id?: string;
   name: string;
@@ -5,5 +7,5 @@ export interface Recipe {
   cookTime: number;
   ingredients: string;
   instructions: string;
-  // tags: Tag[];
+  tags: Tag[];
 } 

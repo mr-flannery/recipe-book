@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
 import { Recipe } from '../domain/recipe';
+import { TagEntity } from './tag.entity';
 
 @Entity()
 export class RecipeEntity {
@@ -23,6 +24,10 @@ export class RecipeEntity {
   @Column("int")
   cookTime: number;
 
+  @ManyToMany(() => TagEntity)
+  @JoinTable()
+  tags: TagEntity[]
+
   static fromRecipe(recipe: Recipe): RecipeEntity {
     const recipeEntity = new RecipeEntity()
     recipeEntity.name = recipe.name;
@@ -30,6 +35,7 @@ export class RecipeEntity {
     recipeEntity.instructions = recipe.instructions;
     recipeEntity.cookTime = recipe.cookTime;
     recipeEntity.prepTime = recipe.prepTime;
+    // TODO: tags
     return recipeEntity;
   }
 
@@ -40,7 +46,9 @@ export class RecipeEntity {
       cookTime: recipeEntity.cookTime,
       prepTime: recipeEntity.prepTime,
       ingredients: recipeEntity.ingredients,
-      instructions:recipeEntity.instructions
+      instructions:recipeEntity.instructions,
+      // TODO: tags
+      tags: []
     }
   }
 }

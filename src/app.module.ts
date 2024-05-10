@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { RecipeModule } from './recipes/recipes.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RecipeEntity } from './recipes/db/recipe.entity';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { TagEntity } from './recipes/db/tag.entity';
 
 @Module({
   imports: [
@@ -18,17 +17,15 @@ import { join } from 'path';
       username: 'postgres',
       password: 'postgres',
       database: 'recipes',
-      entities: [RecipeEntity], // TODO: helper function?
-      synchronize: true, // TODO: shouldn't be set to true in production - what does this do?
+      entities: [RecipeEntity, TagEntity], // TODO: helper function?
+      migrations: ["./migrations/*.js"], // js
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'static'),
       serveRoot: '/static',
       serveStaticOptions: { index: false }
     })
-  ],
-  controllers: [AppController],
-  providers: [AppService],
+  ]
 })
 export class AppModule {}
 
