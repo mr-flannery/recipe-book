@@ -24,4 +24,8 @@ export class RecipeService {
   async getById(id: number): Promise<Recipe> {
     return RecipeEntity.toRecipe(await this.recipeRepository.findOneBy({ id }))
   }
+
+  async edit(recipe: Recipe) {
+    return this.recipeRepository.update(recipe.id, RecipeEntity.fromRecipe(recipe))
+  }
 }

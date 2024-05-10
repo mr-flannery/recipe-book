@@ -2,6 +2,7 @@ import { Recipe } from "./domain/recipe";
 import { z } from "zod";
 
 export interface RecipeDto {
+  id?: string;
   name: string;
   ingredients: string;
   instructions: string;
@@ -10,6 +11,7 @@ export interface RecipeDto {
 }
 
 const RecipeSchema = z.object({
+  id: z.string().regex(/\d+/).optional(),
   name: z.string().min(1).max(40),
   ingredients: z.string(),
   instructions: z.string(),

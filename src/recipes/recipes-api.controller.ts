@@ -1,4 +1,4 @@
-import { Get, Controller, Res, Post, Req } from '@nestjs/common';
+import { Get, Controller, Res, Post, Req, Param } from '@nestjs/common';
 import { Response } from 'express';
 import { RecipeService } from './domain/recipes.service';
 import { RecipeDto, fromRecipe, toRecipe } from './recipe.dto';
@@ -24,5 +24,16 @@ export class RecipesApiController {
     const recipes = (await this.recipeService.list()).map(fromRecipe)
 
     return res.status(200).send(recipes)
+  }
+
+  @Post(':id/edit')
+  async edit(@Req() request: Request, @Res() res: Response, @Param() params: { id: string }) {
+    const recipe = toRecipe({...request.body, id: params.id} as unknown as RecipeDto);
+    await this.recipeService.edit(recipe)
+
+    return res
+      .status(302)
+      .header('Location', `/recipes/${recipe.id}`)
+      .send()
   }
 }

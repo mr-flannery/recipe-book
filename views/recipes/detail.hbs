@@ -25,6 +25,11 @@
     </div>
   </div>
 </div>
+<div>
+  <a href="/recipes/{{recipe.id}}/edit">
+    <input class="cursor-pointer bg-gray-600 border rounded-lg border-gray-600 px-4" type="button" value="Edit" accesskey="s" />
+  </a>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
   document.getElementById('ingredients').innerHTML = marked.parse(`{{recipe.ingredients}}`);
