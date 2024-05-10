@@ -28,4 +28,8 @@ export class RecipeService {
   async edit(recipe: Recipe) {
     return this.recipeRepository.update(recipe.id, RecipeEntity.fromRecipe(recipe))
   }
+
+  async delete(id: string) {
+    return this.recipeRepository.delete(id)
+  }
 }

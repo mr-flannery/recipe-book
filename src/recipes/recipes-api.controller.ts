@@ -1,4 +1,4 @@
-import { Get, Controller, Res, Post, Req, Param } from '@nestjs/common';
+import { Get, Controller, Res, Post, Req, Param, Delete } from '@nestjs/common';
 import { Response } from 'express';
 import { RecipeService } from './domain/recipes.service';
 import { RecipeDto, fromRecipe, toRecipe } from './recipe.dto';
@@ -34,6 +34,16 @@ export class RecipesApiController {
     return res
       .status(302)
       .header('Location', `/recipes/${recipe.id}`)
+      .send()
+  }
+
+  @Delete(':id')
+  async delete(@Req() request: Request, @Res() res: Response, @Param() params: { id: string }) {
+    await this.recipeService.delete(params.id)
+
+    return res
+      .status(302)
+      .header('Location', `/recipes`)
       .send()
   }
 }
